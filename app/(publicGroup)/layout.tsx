@@ -3,7 +3,7 @@ import React from "react";
 
 const PublicGroupLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <div className="@container">
       <Navbar></Navbar>
       {children}
     </div>

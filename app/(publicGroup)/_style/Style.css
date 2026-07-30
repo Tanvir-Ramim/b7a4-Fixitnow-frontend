@@ -1,0 +1,28 @@
+.triangle-shape {
+  clip-path: polygon(100% 70%, 100% 100%, 10% 100%);
+}
+
+.bg-banner {
+  background-image: url("../_assets/backBanner.png");
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+@media (min-width: 1024px) {
+  .bg-banner {
+    background-image: none;
+  }
+}
+
+
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+} 
+
+ .no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

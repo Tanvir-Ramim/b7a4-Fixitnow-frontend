@@ -10,7 +10,7 @@ const ServiceList = async ({
   const query = await searchParams;
   const services = await getServices({ query });
 
-  console.log(services);
+
 
   return (
     <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

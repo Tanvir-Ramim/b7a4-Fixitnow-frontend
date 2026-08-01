@@ -98,12 +98,18 @@ const Navbar = () => {
             </div>
 
             <div className="hidden md:flex items-center gap-6">
-              <button className="text-primary cursor-pointer font-semibold border-r px-4 border-gray-300">
+              <Link
+                href="/login"
+                className="text-primary cursor-pointer font-semibold border-r px-4 border-gray-300"
+              >
                 Login
-              </button>
-              <button className="bg-primary  cursor-pointer text-white py-1.5 font-semibold  px-4 border-gray-300">
+              </Link>
+              <Link
+                href="/register"
+                className="bg-primary  cursor-pointer text-white py-1.5 font-semibold  px-4 border-gray-300"
+              >
                 Sign Up
-              </button>
+              </Link>
             </div>
 
             <div className="flex md:hidden items-center  gap-4">
@@ -136,12 +142,18 @@ const Navbar = () => {
               ))}
             </div>
             <div className=" pb-6 pt-3 flex items-center gap-6">
-              <button className="text-primary text-sm cursor-pointer font-semibold border-r px-4 border-gray-300">
+              <Link
+                href="/login"
+                className="text-primary text-sm cursor-pointer font-semibold border-r px-4 border-gray-300"
+              >
                 Login
-              </button>
-              <button className="bg-primary text-sm cursor-pointer text-white py-1.5 font-semibold  px-4 border-gray-300">
+              </Link>
+              <Link
+                href="/register"
+                className="bg-primary text-sm cursor-pointer text-white py-1.5 font-semibold  px-4 border-gray-300"
+              >
                 Sign Up
-              </button>
+              </Link>
             </div>
           </div>
         </div>

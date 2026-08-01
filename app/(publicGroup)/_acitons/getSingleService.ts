@@ -6,6 +6,7 @@ export const getSingleService = async (id: string) => {
     cache: "force-cache",
     next: {
       revalidate: 60 * 60 * 24,
+      tags:["singleServiceTag"]
     },
   });
 

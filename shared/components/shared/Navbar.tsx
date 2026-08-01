@@ -2,13 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import logo from "../../assets/Logo.png";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 
 import { navdata } from "@/shared/utils/contentData";
 import Link from "next/link";
 import Image from "next/image";
+import { IUser } from "@/app/(publicGroup)/_types/ProfileTypes";
+import { toast } from "sonner";
+import { logout } from "@/shared/service/logout";
+import { useRouter } from "next/navigation";
 
-const Navbar = () => {
+const Navbar = ({ user }: { user: IUser }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const toggleMenu = () => {
@@ -43,6 +47,29 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  const router = useRouter();
+
+  const handleUserMenuAction = async (action: string) => {
+    // if(action === "dashboard" ){
+    //   if(user.data.profile.role === "USER"){
+    //     router.push("/dashboard")
+    //   }
+    //   else if(user.data.profile.role === "AUTHOR"){
+    //     router.push("/author-dashboard")
+    //   }
+    //   else if(user.data.profile.role === "ADMIN"){
+    //     router.push("/admin-dashboard")
+    //   }
+
+    //   return;
+    // }
+
+    if (action === "logout") {
+      await logout();
+      toast.success("User Logged Out Successfully!");
+      router.push("/login");
+    }
+  };
 
   return (
     <div
@@ -97,19 +124,35 @@ const Navbar = () => {
               ))}
             </div>
 
-            <div className="hidden md:flex items-center gap-6">
-              <Link
-                href="/login"
-                className="text-primary cursor-pointer font-semibold border-r px-4 border-gray-300"
-              >
-                Login
-              </Link>
-              <Link
-                href="/register"
-                className="bg-primary  cursor-pointer text-white py-1.5 font-semibold  px-4 border-gray-300"
-              >
-                Sign Up
-              </Link>
+            <div className="hidden md:flex items-center">
+              {!user ? (
+                <Link href="/login">
+                  <button className="bg-primary text-white px-5 py-1.5 font-semibold cursor-pointer">
+                    Login
+                  </button>
+                </Link>
+              ) : (
+                <div className="flex items-center gap-3 bg-gray-100 px-4 py-1.5 rounded-full">
+                  <div className="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center">
+                    <User size={16} />
+                  </div>
+
+                  <span className="font-medium text-gray-700">
+                    {user.email}
+                  </span>
+
+                  <button
+                    // onClick={handleLogout}
+                    onClick={async () => {
+                      await handleUserMenuAction("logout");
+                    }}
+                    className="text-red-500 hover:text-red-600 cursor-pointer"
+                    title="Logout"
+                  >
+                    <LogOut size={20} />
+                  </button>
+                </div>
+              )}
             </div>
 
             <div className="flex md:hidden items-center  gap-4">
@@ -140,20 +183,34 @@ const Navbar = () => {
                   {item?.title}
                 </Link>
               ))}
-            </div>
-            <div className=" pb-6 pt-3 flex items-center gap-6">
-              <Link
-                href="/login"
-                className="text-primary text-sm cursor-pointer font-semibold border-r px-4 border-gray-300"
-              >
-                Login
-              </Link>
-              <Link
-                href="/register"
-                className="bg-primary text-sm cursor-pointer text-white py-1.5 font-semibold  px-4 border-gray-300"
-              >
-                Sign Up
-              </Link>
+
+              {!user ? (
+                <Link href="/login">
+                  <button className="mt-4 w-full bg-primary text-white py-1.5 font-semibold">
+                    Login
+                  </button>
+                </Link>
+              ) : (
+                <div className="mt-4 flex items-center justify-between bg-gray-100 p-2 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">
+                      <User size={14} />
+                    </div>
+
+                    <span className="text-sm font-medium">{user.email}</span>
+                  </div>
+
+                  <button
+                    // onClick={handleLogout}
+                    onClick={async () => {
+                      await handleUserMenuAction("logout");
+                    }}
+                    className="text-red-500 cursor-pointer"
+                  >
+                    <LogOut size={20} />
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 
-const Navbar = () => {
+
+const page = () => {
     return (
         <div>
             
@@ -7,4 +8,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default page;

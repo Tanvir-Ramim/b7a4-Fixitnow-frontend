@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 import { cn } from "@/shared/lib/cn";
+import { Toaster } from "sonner";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -20,7 +21,7 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col">
 
-        {/* <Toaster position="top-right" richColors /> */}
+        <Toaster position="top-right" richColors />
        
         {children}
 

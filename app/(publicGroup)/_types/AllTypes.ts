@@ -5,6 +5,27 @@ export interface CategoryType {
   total: string;
 }
 
+export interface IAvailability {
+  id: string;
+  slotDate: string;
+  startTime: string;
+  endTime: string;
+  isSlotActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+  profileId: string;
+}
+
+export interface ITechnicianProfile {
+  id: string;
+  bio: string | null;
+  experience: number;
+  profilePhoto:string;
+  skills: string[];
+  userId: string;
+  availabilities: IAvailability[];
+}
+
 export interface ITechnician {
   id: string;
   name: string;
@@ -13,6 +34,7 @@ export interface ITechnician {
   role: "CUSTOMER" | "TECHNICIAN" | "ADMIN";
   createdAt: string;
   updatedAt: string;
+  profile?: ITechnicianProfile;
 }
 
 export interface ICategory {
@@ -38,17 +60,9 @@ export interface IService {
   category: ICategory;
 }
 
-export interface IMeta {
-  page: number;
-  limit: number;
-  total: number;
-  totalPage: number;
+export interface ISingleServiceResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: IService;
 }
-
-// export interface ApiResponse {
-//   success: boolean;
-//   statusCode: number;
-//   message: string;
-//   data: Service[];
-//   meta: Meta;
-// }

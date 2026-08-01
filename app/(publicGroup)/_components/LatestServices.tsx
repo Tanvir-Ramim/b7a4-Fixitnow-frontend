@@ -26,7 +26,7 @@ const LatestServices = () => {
           </h1>
 
           <Link
-            href="/jobs"
+            href="/services"
             className="text-primary mt-8 md:flex hidden  md:text-base text-sm font-semibold  items-center gap-2.5 "
           >
             Show all jobs <ArrowRight className="md:text-lg " />

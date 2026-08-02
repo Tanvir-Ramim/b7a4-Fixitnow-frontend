@@ -3,7 +3,6 @@ import men from "../_assets/menBanner.png";
 import line from "../_assets/line.png";
 import "../_style/Style.css";
 
-import { Search } from "lucide-react";
 import Image from "next/image";
 
 const HomePageBanner = () => {

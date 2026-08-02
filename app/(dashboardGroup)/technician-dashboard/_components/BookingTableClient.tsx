@@ -7,6 +7,7 @@ import { completeBooking } from "../_actions/updateBooking";
 
 import { IBooking } from "../_types/bookingType";
 import AcceptBookingModal from "./AcceptBookingModal";
+import TechReviewModal from "./TechReviewModal";
 
 const statusStyles: Record<string, { dot: string; text: string }> = {
   PENDING: { dot: "bg-yellow-500", text: "text-yellow-700" },
@@ -25,6 +26,7 @@ const formatSlotDate = (dateStr: string) =>
 const BookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
   const [selectedBooking, setSelectedBooking] = useState<IBooking | null>(null);
   const [completingId, setCompletingId] = useState<string | null>(null);
+  const [reviewBooking, setReviewBooking] = useState<IBooking | null>(null);
 
   const handleComplete = async (booking: IBooking) => {
     if (!booking.isPayment) {
@@ -57,6 +59,7 @@ const BookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
             <th className="p-4">Customer Note</th>
             <th className="p-4 text-center">Payment</th>
             <th className="p-4 text-center">Status</th>
+            <th className="p-4 text-center">Review</th>
             <th className="p-4 text-center">Actions</th>
           </tr>
         </thead>
@@ -124,6 +127,18 @@ const BookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
                       </span>
                     </div>
                   </td>
+                  <td className="p-4 text-center">
+                    {booking.review ? (
+                      <button
+                        onClick={() => setReviewBooking(booking)}
+                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-yellow-500 text-white hover:bg-yellow-600 transition"
+                      >
+                        View Review
+                      </button>
+                    ) : (
+                      <span className="text-xs text-gray-400">—</span>
+                    )}
+                  </td>
                   <td className="p-4">
                     <div className="flex items-center justify-center gap-2">
                       <button
@@ -151,7 +166,7 @@ const BookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
             })
           ) : (
             <tr>
-              <td colSpan={9} className="py-10 text-center text-gray-500">
+              <td colSpan={10} className="py-10 text-center text-gray-500">
                 No bookings found.
               </td>
             </tr>
@@ -163,6 +178,13 @@ const BookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
         <AcceptBookingModal
           booking={selectedBooking}
           onClose={() => setSelectedBooking(null)}
+        />
+      )}
+
+      {reviewBooking && (
+        <TechReviewModal
+          booking={reviewBooking}
+          onClose={() => setReviewBooking(null)}
         />
       )}
     </div>

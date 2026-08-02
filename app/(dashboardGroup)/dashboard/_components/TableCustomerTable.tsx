@@ -12,7 +12,7 @@ import { getTechBooking } from "../../technician-dashboard/_actions/getTechBooki
 const TableCustomerTable = async () => {
   const user = await getMe();
   const bookings: IBooking[] = (await getTechBooking(user.data.user.id)) ?? [];
-
+  
   return <CustomerBookingTableClient bookings={bookings} />;
 };
 

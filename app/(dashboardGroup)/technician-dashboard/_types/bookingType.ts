@@ -37,6 +37,18 @@ export interface IBookingUser {
   updatedAt: string;
 }
 
+export interface IReview {
+  id: string;
+  rating: number;
+  comment: string;
+  isPublic: boolean;
+  createdAt: string;
+  updatedAt: string;
+  reviewerId: string;
+  technicianId: string;
+  bookingId: string;
+}
+
 export interface IBooking {
   id: string;
   bookingTimeId: string;
@@ -55,4 +67,5 @@ export interface IBooking {
   service: IBookingService;
   customer: IBookingUser;
   technician: IBookingUser;
+  review?: IReview | null;
 }

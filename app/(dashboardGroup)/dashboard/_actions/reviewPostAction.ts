@@ -1,7 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { revalidatePath } from "next/cache";
+
 
 interface ReviewPayload {
   bookingId: string;
@@ -22,7 +22,7 @@ export const submitReview = async (
   const accessToken = cookieStore.get("accessToken")?.value;
 
   try {
-    const res = await fetch(`${process.env.BACKEND_API_URL}/api/v1/review`, {
+    const res = await fetch(`${process.env.BACKEND_API_URL}/review`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export const submitReview = async (
       };
     }
 
-    revalidatePath("/customer-dashboard/bookings"); // <-- adjust to your real route
+    // revalidatePath("/customer-dashboard/bookings"); // <-- adjust to your real route
     return {
       success: true,
       message: "Review submitted successfully",

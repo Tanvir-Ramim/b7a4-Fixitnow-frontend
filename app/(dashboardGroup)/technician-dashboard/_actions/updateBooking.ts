@@ -73,10 +73,15 @@ export const completeBooking = async (
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
+        body: JSON.stringify({
+          isComplete: true,
+        }),
         cache: "no-store",
       },
     );
-
+    revalidateTag("getBooking", {
+      expire: 0,
+    });
     const result = await res.json();
 
     if (!res.ok) {

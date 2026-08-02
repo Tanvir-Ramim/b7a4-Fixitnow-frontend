@@ -2,11 +2,22 @@ import { IService } from "@/app/(publicGroup)/_types/AllTypes";
 import Link from "next/link";
 import { Eye, Pencil, Trash2 } from "lucide-react";
 import DescriptionModal from "./DescriptionModal";
+import { getTechServices } from "../_actions/getTechServices";
+import ServiceDeleteButton from "./ServiceDeleteButton";
 
-const ServiceTable = async ({ services }: { services: IService[] }) => {
+
+const ServiceTable = async ({
+  userId,
+  query,
+}: {
+  userId: string;
+  query?: { [key: string]: string | string[] | undefined };
+}) => {
+  const services = await getTechServices(userId, query);
+
   return (
     <div className="w-full min-h-[54vh] mt-2 overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm customescroll">
-      <table className="w-full min-w-[1100px] border-collapse">
+      <table className="w-full min-w-275 border-collapse">
         <thead>
           <tr className="bg-gray-100 text-left text-sm font-semibold text-gray-700">
             <th className="p-4">Category</th>
@@ -20,7 +31,7 @@ const ServiceTable = async ({ services }: { services: IService[] }) => {
 
         <tbody>
           {services.length > 0 ? (
-            services.map((service) => (
+            services.map((service: IService) => (
               <tr
                 key={service.id}
                 className="border-t border-gray-200 transition hover:bg-gray-50"
@@ -55,9 +66,7 @@ const ServiceTable = async ({ services }: { services: IService[] }) => {
                       <Pencil size={18} />
                     </Link>
 
-                    <button className="rounded-lg p-2 text-red-600 hover:bg-red-50">
-                      <Trash2 size={18} />
-                    </button>
+                    <ServiceDeleteButton serviceId={service.id} />
                   </div>
                 </td>
               </tr>

@@ -5,6 +5,7 @@ export const getLatestService = async () => {
     cache: "force-cache",
     next: {
       revalidate: 60 * 60 * 24,
+      tags:["latestService"]
     },
   });
 

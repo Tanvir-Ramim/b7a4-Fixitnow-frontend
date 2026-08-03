@@ -1,6 +1,5 @@
 "use client";
 import { Eye, EyeOff } from "lucide-react";
-import { useSearchParams } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
 import { loginAction } from "../_actions/loginFunction";
 import { toast } from "sonner";
@@ -8,7 +7,7 @@ import { toast } from "sonner";
 const LoginForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const searchParams = useSearchParams();
+  
   const redirectTo = "";
   const [state, action, pending] = useActionState(
     loginAction.bind(null, redirectTo),

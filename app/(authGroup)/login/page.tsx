@@ -4,7 +4,7 @@ import loginBG from "../_assets/loginImage.png";
 import { ArrowRight, Home } from "lucide-react";
 import logo from "../../../shared/assets/Logo.png";
 
-import React from "react";
+
 import LoginForm from "../_components/LoginForm";
 
 const page = () => {

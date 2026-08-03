@@ -1,6 +1,8 @@
 import { BookOpen } from "lucide-react";
 
 import TableCustomerTable from "../_components/TableCustomerTable";
+import { Suspense } from "react";
+import TableSkeleton from "../../technician-dashboard/_components/TableSkeleton";
 
 const page = () => {
   return (
@@ -18,10 +20,9 @@ const page = () => {
       </div>
 
       <div className="bg-white md:px-6 px-4 md:py-3 border border-gray-300 rounded-xl mt-6 overflow-hidden">
-        {/* <Suspense fallback={<TableSkeleton rows={6} length={6} />}>
-          <ServiceTable userId={user.data.user.id} query={query} />
-        </Suspense> */}
-        <TableCustomerTable></TableCustomerTable>
+        <Suspense fallback={<TableSkeleton rows={6} length={6} />}>
+          <TableCustomerTable></TableCustomerTable>
+        </Suspense>
       </div>
     </div>
   );

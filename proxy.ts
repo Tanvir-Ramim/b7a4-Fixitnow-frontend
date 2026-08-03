@@ -21,7 +21,7 @@ export async function proxy(request: NextRequest) {
   const refreshToken = request.cookies.get("refreshToken")?.value;
 
   let decodedAccessToken = accessToken
-    ? jwtUtils.verifyToken(accessToken, "access-secret")
+    ? jwtUtils.verifyToken(accessToken,  process.env.JWT_ACCESS_SECRET as string,)
     : null;
     
   const decodedRefreshToken = refreshToken

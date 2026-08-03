@@ -1,4 +1,4 @@
-// (dashboardGroup)/categories/page.tsx
+
 import { ChartBarStacked } from "lucide-react";
 import { Suspense } from "react";
 import AddCategoryModal from "../_components/AddCategoryModal";

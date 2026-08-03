@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import  { Suspense } from "react";
 import HomePageBanner from "./_components/HomePageBanner";
 import HomePageCategory from "./_components/HomePageCategory";
 import StartPosting from "./_components/StartPosting";

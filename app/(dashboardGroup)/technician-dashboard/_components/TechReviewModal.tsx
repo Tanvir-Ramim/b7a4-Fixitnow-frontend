@@ -15,7 +15,7 @@ const TechReviewModal = ({ booking, onClose }: Props) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-      <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg">
+      <div className="w-full max-w-md rounded-xl modal-slide-down bg-white p-6 shadow-lg">
         <h2 className="text-lg font-semibold text-gray-900">Customer Review</h2>
         <p className="mt-1 text-sm text-gray-500">
           {booking.service.name} — {booking.customer.name}
@@ -63,7 +63,7 @@ const TechReviewModal = ({ booking, onClose }: Props) => {
         <div className="mt-6 flex justify-end">
           <button
             onClick={onClose}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+            className="rounded-lg bg-blue-600 px-4 cursor-pointer py-2 text-sm font-medium text-white hover:bg-blue-700"
           >
             Close
           </button>

@@ -18,7 +18,7 @@ type ServiceCardProps = {
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
   return (
-    <div className="group  relative overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-lg transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl">
+    <div className="group  h-fit relative overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-lg transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl">
       <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-primary/10 transition-all duration-500 group-hover:scale-150" />
       {/* <div className="absolute -left-8 bottom-0 h-28 w-28 rounded-full bg-primary/5" /> */}
 

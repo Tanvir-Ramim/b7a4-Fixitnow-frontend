@@ -1,4 +1,3 @@
-
 import UserStatusButton from "./UserStatusButton";
 import { getAllUsers } from "../_actions/userActions";
 import { IUser } from "../_type/cateogoryTypes";
@@ -43,6 +42,7 @@ const UserTable = async () => {
                 <td className="p-4">
                   <div className="flex items-center justify-center">
                     <UserStatusButton
+                      role={user.role}
                       userId={user.id}
                       activeStatus={user.activeStatus}
                     />

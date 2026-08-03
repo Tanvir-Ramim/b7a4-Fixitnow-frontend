@@ -5,17 +5,18 @@ import { useTransition } from "react";
 import { toast } from "sonner";
 import { updateUserStatus } from "../_actions/userActions";
 
-
 const UserStatusButton = ({
+  role,
   userId,
   activeStatus,
 }: {
+  role: string;
   userId: string;
   activeStatus: "ACTIVE" | "BANNED";
 }) => {
   const [isPending, startTransition] = useTransition();
   const isActive = activeStatus === "ACTIVE";
-
+  const isAdmin = role === "ADMIN";
   const handleToggle = () => {
     const nextStatus = isActive ? "BANNED" : "ACTIVE";
 
@@ -23,7 +24,7 @@ const UserStatusButton = ({
       const res = await updateUserStatus(userId, nextStatus);
       if (res.success) {
         toast.success(
-          nextStatus === "ACTIVE" ? "User activated" : "User banned"
+          nextStatus === "ACTIVE" ? "User activated" : "User banned",
         );
       } else {
         toast.error(res.message ?? "Failed to update status");
@@ -34,7 +35,7 @@ const UserStatusButton = ({
   return (
     <button
       onClick={handleToggle}
-      disabled={isPending}
+      disabled={isPending || isAdmin}
       className={`rounded-lg cursor-pointer px-3 py-1.5 text-sm font-medium disabled:opacity-50 ${
         isActive
           ? "bg-red-50 text-red-600 hover:bg-red-100"

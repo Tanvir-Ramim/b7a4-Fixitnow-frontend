@@ -131,7 +131,7 @@ const BookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
                     {booking.review ? (
                       <button
                         onClick={() => setReviewBooking(booking)}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-yellow-500 text-white hover:bg-yellow-600 transition"
+                        className="px-3  cursor-pointer py-1.5 rounded-lg text-xs font-medium bg-yellow-500 text-white hover:bg-yellow-600 transition"
                       >
                         View Review
                       </button>

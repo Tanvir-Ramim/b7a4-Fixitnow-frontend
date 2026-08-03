@@ -110,7 +110,7 @@ const CustomerBookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
                     {booking.technicianNotes?.trim() ? (
                       <button
                         onClick={() => setNoteBooking(booking)}
-                        className="px-3 cursor-pointer py-1.5 rounded-lg cursor-pointer text-xs font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition"
+                        className="px-3 cursor-pointer py-1.5 rounded-lg  text-xs font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition"
                       >
                         View Note
                       </button>

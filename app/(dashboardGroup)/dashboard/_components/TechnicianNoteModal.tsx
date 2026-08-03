@@ -10,7 +10,7 @@ interface Props {
 const TechnicianNoteModal = ({ booking, onClose }: Props) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-      <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg">
+      <div className="w-full max-w-md modal-slide-down rounded-xl bg-white p-6 shadow-lg">
         <h2 className="text-lg font-semibold text-gray-900">
           Technician Note
         </h2>

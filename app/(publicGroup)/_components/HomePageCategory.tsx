@@ -1,5 +1,4 @@
-import { category } from "@/shared/utils/contentData";
-import React from "react";
+
 import CategoryCard from "./CategoryCard";
 import { getCategoryService } from "../_acitons/getCategoryService";
 import { ICategory } from "../_types/AllTypes";

@@ -3,7 +3,7 @@
 
 import { cookies } from "next/headers";
 import { ICategory } from "@/app/(publicGroup)/_types/AllTypes";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export const getCategoryService = async (): Promise<ICategory[]> => {
   const cookieStore = await cookies();
@@ -39,7 +39,9 @@ export const createCategoryService = async (payload: {
   const data = await res.json();
 
   if (data.success) {
-    revalidatePath("/dashboard/categories");
+    revalidateTag("categoryCache", {
+      expire: 0,
+    });
   }
 
   return data;
@@ -59,7 +61,9 @@ export const deleteCategoryService = async (id: string) => {
   const data = await res.json();
 
   if (data.success) {
-    revalidatePath("/dashboard/categories");
+    revalidateTag("categoryCache", {
+      expire: 0,
+    });
   }
 
   return data;

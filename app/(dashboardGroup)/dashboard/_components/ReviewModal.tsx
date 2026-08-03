@@ -69,7 +69,7 @@ const ReviewModal = ({ booking, onClose, onSuccess }: Props) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-      <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg">
+      <div className="w-full modal-slide-down max-w-md rounded-xl bg-white p-6 shadow-lg">
         <h2 className="text-lg font-semibold text-gray-900">
           {submittedReview ? "Your Review" : "Leave a Review"}
         </h2>
@@ -113,7 +113,7 @@ const ReviewModal = ({ booking, onClose, onSuccess }: Props) => {
             <div className="mt-6 flex justify-end">
               <button
                 onClick={onClose}
-                className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+                className="rounded-lg cursor-pointer bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
               >
                 Close
               </button>
@@ -174,14 +174,14 @@ const ReviewModal = ({ booking, onClose, onSuccess }: Props) => {
               <button
                 onClick={onClose}
                 disabled={isSubmitting}
-                className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="rounded-lg cursor-pointer border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-60"
+                className="rounded-lg bg-blue-600 cursor-pointer px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-60"
               >
                 {isSubmitting ? "Submitting..." : "Submit Review"}
               </button>

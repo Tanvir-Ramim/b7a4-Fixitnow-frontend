@@ -62,7 +62,7 @@ const CustomerBookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
             <th className="p-4 text-center">Payment</th>
             <th className="p-4 text-center">Status</th>
             <th className="p-4 text-center">Complete</th>
-            <th className="p-4 text-center">Review</th>
+            <th className="p-4 text-center">My Review</th>
           </tr>
         </thead>
         <tbody>
@@ -110,7 +110,7 @@ const CustomerBookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
                     {booking.technicianNotes?.trim() ? (
                       <button
                         onClick={() => setNoteBooking(booking)}
-                        className="px-3 py-1.5 rounded-lg cursor-pointer text-xs font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition"
+                        className="px-3 cursor-pointer py-1.5 rounded-lg cursor-pointer text-xs font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition"
                       >
                         View Note
                       </button>
@@ -162,7 +162,7 @@ const CustomerBookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
                     {booking.isComplete ? (
                       <button
                         onClick={() => setReviewBooking(booking)}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-yellow-500 text-white hover:bg-yellow-600 transition"
+                        className="px-3 cursor-pointer py-1.5 rounded-lg text-xs font-medium bg-yellow-500 text-white hover:bg-yellow-600 transition"
                       >
                         {booking.review ? "View Review" : "Review"}
                       </button>

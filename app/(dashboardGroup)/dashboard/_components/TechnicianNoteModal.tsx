@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { IBooking } from "../../technician-dashboard/_types/bookingType";
 
 interface Props {
@@ -30,7 +29,7 @@ const TechnicianNoteModal = ({ booking, onClose }: Props) => {
         <div className="mt-6 flex justify-end">
           <button
             onClick={onClose}
-            className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="rounded-lg cursor-pointer border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             Close
           </button>

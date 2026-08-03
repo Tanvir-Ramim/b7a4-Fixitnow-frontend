@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import logo from "../../../shared/assets/Logo.png";
 import Link from "next/link";
 import Image from "next/image";
-import { LogOut, SquareMenu } from "lucide-react";
+import { House, LogOut, SquareMenu } from "lucide-react";
 
 import { ISidebarItem, sidebarMenuItems } from "../_config/sideBarMenuItem";
 import { usePathname, useRouter } from "next/navigation";
@@ -95,6 +95,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, role }: SidebarProps) => {
       <div className="flex flex-1 items-center">
         <nav className="w-full px-4">
           <ul className="space-y-2">
+            <li>
+              <Link
+                href={"/"}
+                onClick={() => setSidebarOpen(false)}
+                className={`flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-200 $
+                  
+                        : "text-gray-600 hover:bg-gray-100 hover:text-blue-600"
+                    `}
+              >
+                <House size={20} />
+                <span>Home</span>
+              </Link>
+            </li>
             {navItems.map((item, index) => {
               const Icon = item.icon;
 

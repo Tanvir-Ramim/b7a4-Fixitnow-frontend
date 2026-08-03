@@ -1,17 +1,8 @@
 "use client";
 
-import  { useMemo, useState, useTransition } from "react";
-import { IUser } from "../../admin-dashboard/_type/cateogoryTypes";
+import { useMemo, useState, useTransition } from "react";
+import { IUser } from "../_type/cateogoryTypes";
 import { updateProfileAction } from "../../_actions/profileActions";
-
-
-
-
-
-
-
-
-
 
 function initialsOf(name: string) {
   return name
@@ -22,26 +13,22 @@ function initialsOf(name: string) {
     .join("");
 }
 
-
-
-const CustomerProfile = ({ user }: { user: IUser }) => {
+const AdminProfile = ({ user }: { user: IUser }) => {
   const [isPending, startTransition] = useTransition();
   const [editMode, setEditMode] = useState(false);
   const [name, setName] = useState(user?.name);
   const [bio, setBio] = useState(user.profile?.bio ?? "");
   const [experience, setExperience] = useState(
-    String(user.profile?.experience ?? 0)
+    String(user.profile?.experience ?? 0),
   );
   const [skills, setSkills] = useState<string[]>(user.profile?.skills ?? []);
-
 
   const [saveError, setSaveError] = useState<string | null>(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
 
-
   const initials = useMemo(
     () => initialsOf(name || user.name),
-    [name, user.name]
+    [name, user.name],
   );
 
   function enterEditMode() {
@@ -56,10 +43,6 @@ const CustomerProfile = ({ user }: { user: IUser }) => {
     setSaveError(null);
     setEditMode(false);
   }
-
-
-
- 
 
   function handleSave() {
     setSaveError(null);
@@ -90,19 +73,15 @@ const CustomerProfile = ({ user }: { user: IUser }) => {
     });
   }
 
- 
-
   return (
     <div className=" bg-[#F6F6FB]    font-sans text-[#111827] ">
       <div className=" space-y-6">
         <div className="overflow-hidden rounded-2xl border border-[#E7E7F3] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04),0_4px_16px_-4px_rgba(70,64,222,0.10)]">
-    
           <div className="relative h-28 bg-gradient-to-r from-[#4640DE] to-[#6C63FF]">
             <div className="absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:16px_16px]" />
           </div>
 
           <div className="px-2 pb-8 sm:px-10">
-      
             <div className="-mt-12 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
               <div className="flex items-end gap-4">
                 <div className="flex h-16 z-10 w-16 mt-8 flex-none items-center justify-center rounded-2xl border-4 border-white bg-[#4640DE] text-2xl font-semibold text-white shadow-md">
@@ -186,11 +165,10 @@ const CustomerProfile = ({ user }: { user: IUser }) => {
 
             {/* Name + email */}
             <div className="mt-5">
-           
-                <h1 className="sm:text-2xl  text-xl capitalize font-semibold tracking-tight text-[#111827]">
-                  {name}
-                </h1>
-             
+              <h1 className="sm:text-2xl  text-xl capitalize font-semibold tracking-tight text-[#111827]">
+                {name}
+              </h1>
+
               <p className="mt-1 text-sm text-[#6B7280]">{user.email}</p>
             </div>
 
@@ -227,8 +205,6 @@ const CustomerProfile = ({ user }: { user: IUser }) => {
                 />
               </div>
 
-           
-
               <div>
                 <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-[#9CA3AF]">
                   Email
@@ -240,16 +216,12 @@ const CustomerProfile = ({ user }: { user: IUser }) => {
                   className="w-full rounded-lg border border-[#E5E7EB] bg-[#F9FAFB] px-3.5 py-2.5 text-sm text-[#6B7280] outline-none"
                 />
               </div>
-
-              
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
   );
 };
 
-export default CustomerProfile;
+export default AdminProfile;

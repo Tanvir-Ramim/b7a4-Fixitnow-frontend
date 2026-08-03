@@ -1,5 +1,5 @@
 import {
-  FileText,
+ 
   BookOpen,
   LucideProps,
   UserShield,

@@ -6,8 +6,8 @@ import { revalidateTag, updateTag } from "next/cache";
 type UpdateProfilePayload = {
   name: string;
   bio: string;
-  experience: number;
-  skills: string[];
+  experience?: number;
+  skills?: string[];
 };
 
 type AddAvailabilityPayload = {

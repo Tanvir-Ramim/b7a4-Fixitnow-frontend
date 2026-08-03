@@ -16,7 +16,7 @@ const DescriptionModal = ({ description }: { description: string }) => {
         {description.length > 20 && (
           <button
             onClick={() => setOpen(true)}
-            className="ml-2 font-medium text-blue-600 hover:underline"
+            className="ml-2 font-medium cursor-pointer text-blue-600 hover:underline"
           >
             More
           </button>

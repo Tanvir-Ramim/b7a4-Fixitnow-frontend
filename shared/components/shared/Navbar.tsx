@@ -4,15 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import logo from "../../assets/Logo.png";
 import { Menu, X, User, LogOut } from "lucide-react";
 
-import { navdata } from "@/shared/utils/contentData";
 import Link from "next/link";
 import Image from "next/image";
 import { IUser } from "@/app/(publicGroup)/_types/ProfileTypes";
 import { toast } from "sonner";
 import { logout } from "@/shared/service/logout";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { getNavData } from "@/shared/utils/contentData";
 
 const Navbar = ({ user }: { user: IUser }) => {
+  const navdata = getNavData(user?.role);
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const toggleMenu = () => {
@@ -67,13 +69,13 @@ const Navbar = ({ user }: { user: IUser }) => {
     if (action === "logout") {
       await logout();
       toast.success("User Logged Out Successfully!");
-      router.push("/login");
+      router.push("/");
     }
   };
 
   return (
     <div
-      className={`fixed top-0 w-full z-9999    border-[#e2e9ee] transition-all ease-in-out duration-700 transform ${
+      className={`fixed top-0 w-full z-9999    border  border-[#e2e9ee] transition-all ease-in-out duration-700 transform ${
         scrolling
           ? "shadow-lg bg-white translate-y-0 opacity-100"
           : "translate-y-0 opacity-100"
@@ -88,43 +90,34 @@ const Navbar = ({ user }: { user: IUser }) => {
           <div className="flex items-center max-w-375 mx-auto lg:px-9 md:px-6 px-3   justify-between">
             {/* Left */}
             <div className="flex  items-center gap-2">
-              <Link href="/">
+              <Link className="flex items-center gap-1" href="/">
                 <Image
                   alt="project logo"
                   //   width={400}
                   //   height={400}
                   src={logo}
                 ></Image>
+                <h1 className="sm:text-2xl text-lg font-bold ">FixIt</h1>
                 {/* <img src={logo} alt="logo" className="" /> */}
               </Link>
             </div>
 
             {/* Middle */}
             <div className="hidden md:flex items-center gap-8">
-              {navdata?.map((item, index) => (
+              {navdata.map((item, index) => (
                 <Link
-                  key={index}
                   href={item?.link}
-                  className={`md:text-[18px] font-semibold text-[17px] ${
-                    item?.title === "Home" ? "text-primary" : "text-[#5A5B5F]"
+                  key={index}
+                  className={`py-2 border-b border-gray-300 md:text-[18px] font-semibold text-[17px] ${
+                    pathname === item?.link ? "text-primary" : "text-[#5A5B5F]"
                   }`}
                 >
-                  {" "}
                   {item?.title}
                 </Link>
-                // <a
-                //   key={index}
-                //   href={item?.link}
-                //   className={`md:text-[18px] font-semibold text-[17px] ${
-                //     item?.title === "Home" ? "text-primary" : "text-[#5A5B5F]"
-                //   }`}
-                // >
-                //   {item?.title}
-                // </a>
               ))}
             </div>
 
-            <div className="hidden md:flex items-center">
+            <div className="hidden  md:flex items-center">
               {!user ? (
                 <Link href="/login">
                   <button className="bg-primary text-white px-5 py-1.5 font-semibold cursor-pointer">
@@ -137,8 +130,8 @@ const Navbar = ({ user }: { user: IUser }) => {
                     <User size={16} />
                   </div>
 
-                  <span className="font-medium text-gray-700">
-                    {user.email}
+                  <span className="font-medium capitalize text-gray-700">
+                    {user.name}
                   </span>
 
                   <button
@@ -160,7 +153,7 @@ const Navbar = ({ user }: { user: IUser }) => {
                 onClick={toggleMenu}
                 className=" cursor-pointer bg-white rounded-full  "
               >
-                {menuOpen ? <Menu size={22} /> : <X size={22} />}
+                {menuOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
             </div>
           </div>
@@ -197,7 +190,7 @@ const Navbar = ({ user }: { user: IUser }) => {
                       <User size={14} />
                     </div>
 
-                    <span className="text-sm font-medium">{user.email}</span>
+                    <span className="text-sm font-medium">{user.name}</span>
                   </div>
 
                   <button

@@ -1,16 +1,20 @@
-"use client"
+"use client";
 
-import { Link, LucideSquareMenu } from "lucide-react";
+import { LucideSquareMenu } from "lucide-react";
 import logo from "../../../shared/assets/Logo.png";
 
-
 import { useState, useEffect, useRef } from "react";
-
+import Image from "next/image";
+import Link from "next/link";
 
 const AdminHeader = ({
+  email,
+  name,
   setSidebarOpen,
   sidebarOpen,
 }: {
+  email: string;
+  name: string;
   setSidebarOpen: (value: boolean) => void;
   sidebarOpen: boolean;
 }) => {
@@ -32,13 +36,7 @@ const AdminHeader = ({
 
   const [profileOpen, setProfileOpen] = useState(false);
 
-
   const profileRef = useRef<HTMLDivElement>(null);
-
-  const toggleProfile = () => {
-    setProfileOpen(!profileOpen);
-  };
-
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -63,13 +61,55 @@ const AdminHeader = ({
         {/* Left */}
         <div className="flex items-center">
           <div className="lg:flex flex-col hidden">
-            <h1 className="text-lg font-semibold text-gray-800">
-              {getGreeting()} <span className="font-bold">Tanvir</span>
+            <h1 className="text-lg font-semibold capitalize text-gray-800">
+              {getGreeting()} <span className="font-bold">{name}</span>
             </h1>
             <p className="text-sm text-gray-500">{formattedDate}</p>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
+          {/* <div className="block items-center gap-2 sm:gap-4 lg:hidden">
+            <h1 className=" pl-1.5 flex  items-center gap-2-0 ">
+              <Link href="/">
+                {" "}
+                <Image src={logo} alt="Logo" />
+              </Link>
+
+              <h1 className="sm:text-2xl text-lg font-bold ">FixIt</h1>
+            </h1>
+          </div> */}
+          <div className="block items-center gap-2 sm:gap-4 lg:hidden">
+            <Link href="/">
+              <h1 className=" pl-1.5 flex  items-center gap-2-0 ">
+                {" "}
+                <Image src={logo} alt="Logo" />
+                <span className="sm:text-2xl text-lg font-bold ">FixIt</span>
+              </h1>
+            </Link>
+          </div>
+        </div>
+
+        {/* Right Desktop */}
+        <div className="hidden xl:flex items-center gap-6">
+          <div className="flex items-center gap-4">
+            <div className="h-8 w-px bg-gray-300"></div>
+            <div className="flex items-center gap-3 cursor-pointer">
+              <div className="leading-tight capitalize font-medium">
+                {name}
+                <p className="text-xs mt-0.5 lowercase pt-1 text-gray-500">
+                  {email}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Mobile */}
+        <div className="flex xl:hidden items-center gap-4">
+          <div className="flex items-center gap-4">
+            <div className="i">
+              <h1 className="capitalize">{name}</h1>
+              <h1 className="text-xs">{email}</h1>
+            </div>
             <button
               aria-controls="sidebar"
               aria-expanded={sidebarOpen}
@@ -81,59 +121,9 @@ const AdminHeader = ({
             >
               <LucideSquareMenu size={25} />
             </button>
-
-            <Link className="block pl-1.5 shrink-0 lg:hidden" href="/">
-              {/* <img src={logo} alt="Logo" className="w-28" /> */}
-            </Link>
           </div>
-        </div>
-
-        {/* Right Desktop */}
-        <div className="hidden xl:flex items-center gap-6">
-          <div className="flex items-center gap-4">
-            {/* <div className="cursor-pointer">
-              <IconSvg
-                name={"notification"}
-                className="w-6 h-5 text-gray-600"
-              />
-            </div> */}
-
-            <div className="h-8 w-px bg-gray-300"></div>
-
-            <div className="flex items-center gap-3 cursor-pointer">
-              <div className="leading-tight font-medium">
-                Tanvir Hossan
-                <p className="text-xs mt-0.5 pt-1 text-gray-500">Developer</p>
-              </div>
-              <img
-                src="https://i.pravatar.cc/150?img=12"
-                alt="profile"
-                className="w-9 h-9 rounded-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Right Mobile */}
-        <div className="flex xl:hidden items-center gap-4">
-          {/* <div className="mt-1.5 cursor-pointer">
-            <IconSvg
-              name={"notification"}
-              className="w-6 h-5 text-gray-600"
-            />
-          </div> */}
-
-          <button className="cursor-pointer" onClick={toggleProfile}>
-            <img
-              src="https://i.pravatar.cc/150?img=12"
-              alt="profile"
-              className="h-7 w-7 rounded-full border border-[#CDCFD2] object-cover"
-            />
-          </button>
         </div>
       </div>
-
-      {/* Profile Dropdown Mobile */}
       <div
         ref={profileRef}
         className={`xl:hidden absolute left-0 top-full w-full bg-white shadow-md z-40 transition-all duration-300 ${
@@ -144,13 +134,8 @@ const AdminHeader = ({
       >
         <div className="flex items-center gap-3 p-4">
           <div className="flex items-center gap-3 cursor-pointer">
-            <img
-              src="https://i.pravatar.cc/150?img=12"
-              alt="profile"
-              className="w-11 h-11 rounded-full object-cover"
-            />
             <div className="leading-tight mt-1">
-              Tanvir Hossan <span className="text-xs">(Developer)</span>
+              {name} <span className="text-xs">{email}</span>
               <p className="text-sm text-gray-500">{formattedDate}</p>
             </div>
           </div>

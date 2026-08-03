@@ -61,7 +61,7 @@ export default function ServiceDeleteButton({
     <button
       disabled={loading}
       onClick={handleDelete}
-      className="rounded-lg p-2 text-red-600 hover:bg-red-50 disabled:opacity-50"
+      className="rounded-lg p-2 cursor-pointer text-red-600 hover:bg-red-50 disabled:opacity-50"
     >
       {loading ? (
         <Loader2 size={18} className="animate-spin" />

@@ -3,6 +3,7 @@
 import  { useMemo, useState, useTransition } from "react";
 import { IUser } from "@/app/(publicGroup)/_types/ProfileTypes";
 import { addAvailabilityAction, updateProfileAction } from "../../_actions/profileActions";
+import { useRouter } from "next/navigation";
 
 
 function formatSlotDate(iso: string) {
@@ -47,9 +48,8 @@ function initialsOf(name: string) {
 
 const ProfileSection = ({ user }: { user: IUser }) => {
   const [isPending, startTransition] = useTransition();
-
   const [editMode, setEditMode] = useState(false);
-  const [name, setName] = useState(user.name);
+  const [name, setName] = useState(user?.name);
   const [bio, setBio] = useState(user.profile?.bio ?? "");
   const [experience, setExperience] = useState(
     String(user.profile?.experience ?? 0)
@@ -70,7 +70,7 @@ const ProfileSection = ({ user }: { user: IUser }) => {
   const [slotError, setSlotError] = useState<string | null>(null);
   const [slotSuccess, setSlotSuccess] = useState(false);
   const [isSlotPending, startSlotTransition] = useTransition();
-
+const router = useRouter();
   const initials = useMemo(
     () => initialsOf(name || user.name),
     [name, user.name]
@@ -186,19 +186,19 @@ const ProfileSection = ({ user }: { user: IUser }) => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F6F6FB] px-4 py-10 font-sans text-[#111827] sm:px-8">
-      <div className="mx-auto max-w-4xl space-y-6">
+    <div className="min-h-screen bg-[#F6F6FB]  font-sans text-[#111827] ">
+      <div className=" space-y-6">
         <div className="overflow-hidden rounded-2xl border border-[#E7E7F3] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04),0_4px_16px_-4px_rgba(70,64,222,0.10)]">
     
           <div className="relative h-28 bg-gradient-to-r from-[#4640DE] to-[#6C63FF]">
             <div className="absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:16px_16px]" />
           </div>
 
-          <div className="px-6 pb-8 sm:px-10">
+          <div className="px-2 pb-8 sm:px-10">
       
             <div className="-mt-12 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
               <div className="flex items-end gap-4">
-                <div className="flex h-24 w-24 flex-none items-center justify-center rounded-2xl border-4 border-white bg-[#4640DE] text-2xl font-semibold text-white shadow-md">
+                <div className="flex h-16 z-10 w-16 mt-8 flex-none items-center justify-center rounded-2xl border-4 border-white bg-[#4640DE] text-2xl font-semibold text-white shadow-md">
                   {initials || "?"}
                 </div>
                 <div className="pb-1">
@@ -213,7 +213,7 @@ const ProfileSection = ({ user }: { user: IUser }) => {
                   <button
                     type="button"
                     onClick={enterEditMode}
-                    className="inline-flex items-center gap-2 rounded-lg bg-[#4640DE] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#3934B8] active:bg-[#302BA0]"
+                    className="inline-flex items-center cursor-pointer gap-2 rounded-lg bg-[#4640DE] px-4 sm:py-2.5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#3934B8] active:bg-[#302BA0]"
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
                       <path
@@ -238,7 +238,7 @@ const ProfileSection = ({ user }: { user: IUser }) => {
                       type="button"
                       onClick={cancelEdit}
                       disabled={isPending}
-                      className="rounded-lg border border-[#E5E7EB] bg-white px-4 py-2.5 text-sm font-semibold text-[#4B5563] transition hover:bg-[#F9FAFB] disabled:opacity-50"
+                      className="rounded-lg border cursor-pointer border-[#E5E7EB] bg-white px-4 sm:py-2.5 py-2 text-sm font-semibold text-[#4B5563] transition hover:bg-[#F9FAFB] disabled:opacity-50"
                     >
                       Cancel
                     </button>
@@ -246,7 +246,7 @@ const ProfileSection = ({ user }: { user: IUser }) => {
                       type="button"
                       onClick={handleSave}
                       disabled={isPending}
-                      className="inline-flex items-center gap-2 rounded-lg bg-[#4640DE] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#3934B8] disabled:opacity-60"
+                      className="inline-flex items-center gap-2 cursor-pointer rounded-lg bg-[#4640DE] px-4 sm:py-2.5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#3934B8] disabled:opacity-60"
                     >
                       {isPending && (
                         <svg
@@ -279,18 +279,11 @@ const ProfileSection = ({ user }: { user: IUser }) => {
 
             {/* Name + email */}
             <div className="mt-5">
-              {editMode ? (
-                <input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Full name"
-                  className="w-full max-w-sm rounded-lg border border-[#4640DE] bg-white px-3 py-2 text-xl font-semibold text-[#111827] outline-none ring-4 ring-[#4640DE]/10"
-                />
-              ) : (
-                <h1 className="text-2xl font-semibold tracking-tight text-[#111827]">
+           
+                <h1 className="sm:text-2xl  text-xl capitalize font-semibold tracking-tight text-[#111827]">
                   {name}
                 </h1>
-              )}
+             
               <p className="mt-1 text-sm text-[#6B7280]">{user.email}</p>
             </div>
 
@@ -305,7 +298,7 @@ const ProfileSection = ({ user }: { user: IUser }) => {
               </div>
             )}
 
-            <div className="my-7 h-px w-full bg-[#EEF0F3]" />
+            <div className="my-4 h-px w-full bg-[#EEF0F3]" />
 
             {/* Fields */}
             <div className="grid gap-6 sm:grid-cols-2">
@@ -414,8 +407,8 @@ const ProfileSection = ({ user }: { user: IUser }) => {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-2xl border border-[#E7E7F3] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04),0_4px_16px_-4px_rgba(70,64,222,0.10)]">
-          <div className="flex items-center justify-between border-b border-[#EEF0F3] px-6 py-5 sm:px-10">
+        <div className="overflow-hidden px-3 sm:px-6 md:px-10 rounded-2xl border border-[#E7E7F3] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04),0_4px_16px_-4px_rgba(70,64,222,0.10)]">
+          <div className="flex sm:flex-row flex-col sm:items-center justify-between border-b border-[#EEF0F3]  py-5 sm:px-10">
             <div>
               <h2 className="text-base font-semibold text-[#111827]">
                 Availability
@@ -431,7 +424,7 @@ const ProfileSection = ({ user }: { user: IUser }) => {
                 setSlotSuccess(false);
                 setShowAddSlot((v) => !v);
               }}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[#4640DE] px-3.5 py-2 text-sm font-semibold text-[#4640DE] transition hover:bg-[#EEEDFC]"
+              className="inline-flex items-center w-fit sm:mt-0 mt-2 gap-1.5 rounded-lg border border-[#4640DE] px-3.5 sm:py-2 py-1.5 cursor-pointer text-sm font-semibold text-[#4640DE] transition hover:bg-[#EEEDFC]"
             >
               {showAddSlot ? (
                 "Close"
@@ -451,7 +444,7 @@ const ProfileSection = ({ user }: { user: IUser }) => {
             </button>
           </div>
 
-          <div className="px-6 py-6 sm:px-10">
+          <div className=" py-6 ">
             {showAddSlot && (
               <div className="mb-6 rounded-xl border border-[#E7E7F3] bg-[#FAFAFD] p-5">
                 {slotError && (
@@ -506,7 +499,7 @@ const ProfileSection = ({ user }: { user: IUser }) => {
                     type="button"
                     onClick={handleAddSlot}
                     disabled={isSlotPending}
-                    className="inline-flex items-center gap-2 rounded-lg bg-[#4640DE] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#3934B8] disabled:opacity-60"
+                    className="inline-flex cursor-pointer items-center sm:py-2 py-1.5 gap-2 rounded-lg bg-primary px-4  text-sm font-semibold text-white shadow-sm transition hover:bg-[#3934B8] disabled:opacity-60"
                   >
                     {isSlotPending ? "Adding…" : "Add slot"}
                   </button>

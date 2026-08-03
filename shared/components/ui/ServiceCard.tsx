@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -23,8 +22,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
       <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-primary/10 transition-all duration-500 group-hover:scale-150" />
       {/* <div className="absolute -left-8 bottom-0 h-28 w-28 rounded-full bg-primary/5" /> */}
 
-      <div className="relative p-7">
-
+      <div className="relative p-6">
         <div className="flex items-start justify-between">
           <span className="rounded-full bg-primary/10 px-4 py-1 text-xs font-semibold text-primary">
             {service.category.name}
@@ -35,37 +33,38 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
           </span>
         </div>
 
-        <h2 className="mt-4 line-clamp-2 text-xl font-bold leading-snug text-gray-900 transition-colors group-hover:text-primary">
-          {service.title}
+        <h2 className="mt-4 line-clamp-2 text-lg font-bold leading-snug text-gray-900 transition-colors group-hover:text-primary">
+          {service.name}
         </h2>
-        <p className="mt-2 text-sm font-medium text-gray-500">{service.name}</p>
+        <p className="mt-2 text-sm font-medium text-gray-500">
+          {service.title}
+        </p>
 
-        <div className="my-5 border-t border-dashed border-gray-200" />
+        <div className="my-4 border-t border-dashed border-gray-200" />
         <div className="flex items-center gap-4">
-
           <div>
             <p className="text-xs uppercase tracking-widest text-gray-400">
               Technician
             </p>
 
-            <p className="font-semibold text-gray-900">
+            <p className="font-semibold capitalize text-gray-900">
               {service.technician.name}
             </p>
           </div>
         </div>
 
-        <div className="mt-8 flex items-center justify-between">
+        <div className="mt-6 flex items-center justify-between">
           <div>
             <p className="text-xs text-gray-400">Category</p>
 
-            <p className="font-semibold text-gray-800">
+            <p className="font-semibold capitalize text-gray-800">
               {service.category.name}
             </p>
           </div>
 
           <Link
             href={`/services/${service.id}`}
-            className="group/button flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-all hover:scale-105"
+            className="group/button flex items-center gap-2 rounded-xl border border-primary px-3.5 py-2 text-sm font-semibold  transition-all hover:scale-105"
           >
             Details
             <ArrowRight

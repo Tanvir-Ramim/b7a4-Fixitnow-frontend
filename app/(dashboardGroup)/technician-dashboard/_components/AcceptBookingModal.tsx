@@ -38,7 +38,7 @@ const AcceptBookingModal = ({ booking, onClose }: Props) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-      <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg">
+      <div className="w-full max-w-md modal-slide-down rounded-xl bg-white p-6 shadow-lg">
         <h2 className="text-lg font-semibold text-gray-900">
           Accept Booking
         </h2>
@@ -63,14 +63,14 @@ const AcceptBookingModal = ({ booking, onClose }: Props) => {
           <button
             onClick={onClose}
             disabled={isSubmitting}
-            className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="rounded-lg border cursor-pointer border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             Cancel
           </button>
           <button
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-60"
+            className="rounded-lg bg-blue-600 cursor-pointer px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-60"
           >
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>

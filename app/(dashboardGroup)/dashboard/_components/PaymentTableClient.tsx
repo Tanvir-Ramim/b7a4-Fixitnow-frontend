@@ -65,7 +65,7 @@ const PaymentTableClient = ({ payments }: { payments: IPayment[] }) => {
                       {payment.booking.technician.email}
                     </div>
                   </td>
-                  <td className="p-4 whitespace-nowrap">
+                  <td className="p-4 whitespace-nowrap text-green-400">
                     {formatAmount(payment.amount, payment.currency)}
                   </td>
                   <td className="p-4">

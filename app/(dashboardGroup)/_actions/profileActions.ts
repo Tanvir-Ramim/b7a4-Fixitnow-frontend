@@ -1,7 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { revalidateTag } from "next/cache";
+import { revalidateTag, updateTag } from "next/cache";
 
 type UpdateProfilePayload = {
   name: string;
@@ -28,7 +28,6 @@ export const updateProfileAction = async (
 ): Promise<ActionResult> => {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("accessToken")?.value;
-
   const res = await fetch(`${process.env.BACKEND_API_URL}/user/updateProfile`, {
     method: "PUT",
     headers: {
@@ -39,11 +38,9 @@ export const updateProfileAction = async (
   });
 
   const result = await res.json();
-
+  
   if (result.success) {
-    revalidateTag("my-profile", {
-      expire: 0,
-    });
+     updateTag("my-profile");
   }
 
   return result;

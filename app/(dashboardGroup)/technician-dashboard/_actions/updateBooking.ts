@@ -47,6 +47,10 @@ export const acceptBooking = async (
     revalidateTag("getBooking", {
       expire: 0,
     });
+
+    revalidateTag("singleServiceTag", {
+      expire: 0,
+    });
     // revalidatePath("/");
     return {
       success: true,

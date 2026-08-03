@@ -2,10 +2,10 @@
 import React from "react";
 
 import { ChartBarStacked } from "lucide-react";
-import { CategoryType } from "../_types/AllTypes";
+import { CategoryType, ICategory } from "../_types/AllTypes";
 import { ListChecks } from 'lucide-react';
 interface Props {
-  item: CategoryType;
+  item: ICategory;
 }
 
 const CategoryCard: React.FC<Props> = ({ item }) => {
@@ -16,12 +16,12 @@ const CategoryCard: React.FC<Props> = ({ item }) => {
       </div>
 
       <h3 className="lg:text-2xl md:text-xl text-lg font-semibold text-gray-800 transition-all duration-500 group-hover:text-white">
-        {item.title}
+        {item.name}
       </h3>
 
       <div className="mt-3 flex items-center justify-between">
         <p className="text-gray-500 md:text-lg text-base transition-all duration-500 group-hover:text-white">
-          {item.total}
+          {item.sortDescriptoin}
         </p>
 
         <ListChecks className="text-gray-500 transition-all duration-500 group-hover:text-white" />

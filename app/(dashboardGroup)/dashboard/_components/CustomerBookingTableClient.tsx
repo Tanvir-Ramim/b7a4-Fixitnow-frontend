@@ -86,7 +86,7 @@ const CustomerBookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
                     </div>
                   </td>
                   <td className="p-4">{booking.service.name}</td>
-                  <td className="p-4">${booking.service.price}</td>
+                  <td className="p-4 text-green-400">৳{booking.service.price}</td>
                   <td className="p-4 whitespace-nowrap">
                     <div>{formatSlotDate(booking.bookingTime.slotDate)}</div>
                     <div className="text-gray-500 text-xs">
@@ -110,7 +110,7 @@ const CustomerBookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
                     {booking.technicianNotes?.trim() ? (
                       <button
                         onClick={() => setNoteBooking(booking)}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition"
+                        className="px-3 py-1.5 rounded-lg cursor-pointer text-xs font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition"
                       >
                         View Note
                       </button>
@@ -127,9 +127,9 @@ const CustomerBookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
                       <button
                         onClick={() => handlePay(booking)}
                         disabled={payingId === booking.id}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-60 transition"
+                        className="px-3 cursor-pointer py-1.5 rounded-lg text-xs font-medium bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-60 transition"
                       >
-                        {payingId === booking.id ? "..." : "Pay Now"}
+                        {payingId === booking.id ? "..." : "Pay"}
                       </button>
                     ) : (
                       <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-500">

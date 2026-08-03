@@ -52,19 +52,7 @@ const ServiceTable = async ({
 
                 <td className="p-4">
                   <div className="flex items-center justify-center gap-2">
-                    <Link
-                      href={`/dashboard/services/${service.id}`}
-                      className="rounded-lg p-2 text-gray-600 hover:bg-gray-100"
-                    >
-                      <Eye size={18} />
-                    </Link>
-
-                    <Link
-                      href={`/dashboard/services/edit/${service.id}`}
-                      className="rounded-lg p-2 text-blue-600 hover:bg-blue-50"
-                    >
-                      <Pencil size={18} />
-                    </Link>
+              
 
                     <ServiceDeleteButton serviceId={service.id} />
                   </div>

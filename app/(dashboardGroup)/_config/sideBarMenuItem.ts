@@ -1,4 +1,13 @@
-import { FileText, LayoutDashboard, LucideProps } from "lucide-react";
+import {
+  FileText,
+  BookOpen,
+  LucideProps,
+  UserShield,
+  CreditCard,
+  WrenchOff,
+  UsersRound,
+  ChartBarStacked 
+} from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 export type ISidebarItem = {
@@ -13,17 +22,17 @@ const CUSTOMER_SIDEBAR_ITEMS: ISidebarItem[] = [
   {
     label: "Profile",
     href: "/dashboard",
-    icon: LayoutDashboard,
+    icon: UserShield,
   },
   {
-    label: "My Posts",
+    label: "My Booking",
     href: "/dashboard/booking-list",
-    icon: FileText,
+    icon: BookOpen,
   },
   {
     label: "Payment List",
     href: "/dashboard/payment-list",
-    icon: FileText,
+    icon: CreditCard,
   },
 ];
 
@@ -31,35 +40,35 @@ const TECHNICIAN_SIDEBAR_ITEMS: ISidebarItem[] = [
   {
     label: "Profile",
     href: "/technician-dashboard",
-    icon: LayoutDashboard,
+    icon: UserShield,
   },
   {
     label: "Booking List",
     href: "/technician-dashboard/booking-list",
-    icon: FileText,
+    icon: BookOpen,
   },
   {
     label: "Service List",
     href: "/technician-dashboard/service-list",
-    icon: FileText,
+    icon: WrenchOff,
   },
 ];
 const ADMIN_SIDEBAR_ITEMS: ISidebarItem[] = [
   {
     label: "Profile",
     href: "/admin-dashboard",
-    icon: LayoutDashboard,
+    icon: UserShield,
   },
   {
     label: "User List",
     href: "/admin-dashboard/user-list",
-    icon: FileText,
+    icon: UsersRound,
   },
   {
     label: "Category",
     href: "/admin-dashboard/category-list",
-    icon: FileText,
-  }
+    icon: ChartBarStacked,
+  },
 ];
 
 export const sidebarMenuItems = {

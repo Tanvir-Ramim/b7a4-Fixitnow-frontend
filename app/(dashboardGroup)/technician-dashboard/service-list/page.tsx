@@ -1,6 +1,5 @@
 import { getCategoryService } from "@/app/(publicGroup)/_acitons/getCategoryService";
 import { WrenchOff } from "lucide-react";
-import Link from "next/link";
 import ServiceTable from "../_components/ServiceTable";
 import ServiceSearchBar from "@/app/(publicGroup)/services/_components/ServiceSearchBar";
 import { getMe } from "@/shared/service/getMe";
@@ -28,11 +27,11 @@ const page = async ({
           </div>
 
           <p className="md:text-xl text-lg font-bold text-gray-900 leading-tight">
-            Job List
+            Service List
           </p>
         </div>
 
-        <div className="flex justify-end h-fit @xl:mt-0 mt-3 gap-4">
+        <div className="flex @xl:justify-end h-fit @xl:mt-0 mt-3 gap-4">
           <AddServiceModal categories={categories}></AddServiceModal>
         </div>
       </div>

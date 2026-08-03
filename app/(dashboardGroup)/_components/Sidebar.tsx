@@ -6,7 +6,9 @@ import Image from "next/image";
 import { LogOut, SquareMenu } from "lucide-react";
 
 import { ISidebarItem, sidebarMenuItems } from "../_config/sideBarMenuItem";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { logout } from "@/shared/service/logout";
+import { toast } from "sonner";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -17,9 +19,9 @@ interface SidebarProps {
 const Sidebar = ({ sidebarOpen, setSidebarOpen, role }: SidebarProps) => {
   const trigger = useRef<HTMLButtonElement | null>(null);
   const sidebar = useRef<HTMLElement | null>(null);
-    const pathname = usePathname();
+  const pathname = usePathname();
   let navItems: ISidebarItem[] = [];
-
+  const router = useRouter();
   if (role === "CUSTOMER") {
     navItems = sidebarMenuItems.CUSTOMER;
   } else if (role === "TECHNICIAN") {
@@ -42,6 +44,27 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, role }: SidebarProps) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [sidebarOpen, setSidebarOpen]);
+  const handleUserMenuAction = async (action: string) => {
+    // if(action === "dashboard" ){
+    //   if(user.data.profile.role === "USER"){
+    //     router.push("/dashboard")
+    //   }
+    //   else if(user.data.profile.role === "AUTHOR"){
+    //     router.push("/author-dashboard")
+    //   }
+    //   else if(user.data.profile.role === "ADMIN"){
+    //     router.push("/admin-dashboard")
+    //   }
+
+    //   return;
+    // }
+
+    if (action === "logout") {
+      await logout();
+      toast.success("User Logged Out Successfully!");
+      router.push("/login");
+    }
+  };
 
   return (
     <aside
@@ -53,7 +76,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, role }: SidebarProps) => {
       {/* Logo */}
       <div className="flex border-b border-gray-300 items-center justify-center px-2 py-5 relative">
         <Link href="/">
-          <Image className="lg:w-full w-[80%]" src={logo} alt="Logo" />
+          <div className="flex items-center gap-1.5">
+            <Image className="lg:w-full w-[80%] " src={logo} alt="Logo" />
+            <h1 className="sm:text-2xl text-lg font-bold ">FixIt</h1>
+          </div>
         </Link>
 
         <button
@@ -69,11 +95,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, role }: SidebarProps) => {
       <div className="flex flex-1 items-center">
         <nav className="w-full px-4">
           <ul className="space-y-2">
-            {navItems.map((item) => {
+            {navItems.map((item, index) => {
               const Icon = item.icon;
 
-              const isActive =
-                pathname === item.href || pathname.startsWith(`${item.href}/`);
+              const isRootItem = index === 0;
+
+              const isActive = isRootItem
+                ? pathname === item.href
+                : pathname === item.href ||
+                  pathname.startsWith(`${item.href}/`);
 
               return (
                 <li key={item.href}>
@@ -98,7 +128,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, role }: SidebarProps) => {
 
       {/* Logout */}
       <div className="px-4 pb-6">
-        <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-red-50 py-3 text-sm font-semibold text-red-600 hover:bg-red-100 transition">
+        <button
+          onClick={async () => {
+            await handleUserMenuAction("logout");
+          }}
+          className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-red-50 py-3 text-sm font-semibold text-red-600 hover:bg-red-100 transition"
+        >
           <LogOut className="text-lg" />
           Logout
         </button>

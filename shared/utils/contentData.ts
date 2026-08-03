@@ -1,20 +1,13 @@
 import { CategoryType } from "@/app/(publicGroup)/_types/AllTypes";
-
-export const navdata = [
-  {
-    title: "Home",
-    link: "/",
-  },
-  {
-    title: "All Jobs",
-    link: "/jobs",
-  },
-  {
-    title: "Add Job",
-    link: "/admin",
-  },
+export const getNavData = (role:string) => [
+  { title: "Home", link: "/" },
+  { title: "Services", link: "/services" },
+  ...(role === "ADMIN"
+    ? [{ title: "Dashboard", link: "/admin-dashboard" }]
+    : role === "TECHNICIAN"
+    ? [{ title: "Dashboard", link: "/technician-dashboard" }]
+    : [{ title: "Dashboard", link: "/dashboard" }]),
 ];
-
 export const category: CategoryType[] = [
   {
     id: 1,

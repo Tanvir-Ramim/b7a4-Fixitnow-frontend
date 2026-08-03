@@ -86,7 +86,7 @@ const BookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
                     </div>
                   </td>
                   <td className="p-4">{booking.service.name}</td>
-                  <td className="p-4">${booking.service.price}</td>
+                  <td className="p-4 text-green-600">৳{booking.service.price}</td>
                   <td className="p-4 whitespace-nowrap">
                     <div>{formatSlotDate(booking.bookingTime.slotDate)}</div>
                     <div className="text-gray-500 text-xs">
@@ -144,14 +144,14 @@ const BookingTableClient = ({ bookings }: { bookings: IBooking[] }) => {
                       <button
                         onClick={() => setSelectedBooking(booking)}
                         disabled={isAccepted}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed transition"
+                        className="px-3 py-1.5 cursor-pointer rounded-lg text-xs font-medium bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed transition"
                       >
                         {isAccepted ? "Accepted" : "Accept"}
                       </button>
                       <button
                         onClick={() => handleComplete(booking)}
                         disabled={!canComplete || completingId === booking.id}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-green-600 text-white hover:bg-green-700 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed transition"
+                        className="px-3 py-1.5 cursor-pointer rounded-lg text-xs font-medium bg-green-600 text-white hover:bg-green-700 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed transition"
                       >
                         {booking.isComplete
                           ? "Completed"

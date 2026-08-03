@@ -18,13 +18,15 @@ export default function DashboardLayout({
     <div className="dark:bg-boxdark-2 dark:text-bodydark">
       <div className="flex h-screen overflow-hidden bg-[#F5F6FA]">
         <Sidebar
-          role={user.role}
+          role={user?.role}
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
         />
 
         <div className="relative flex flex-1 flex-col overflow-hidden">
           <AdminHeader
+            email={user?.email}
+            name={user?.name}
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}
           />

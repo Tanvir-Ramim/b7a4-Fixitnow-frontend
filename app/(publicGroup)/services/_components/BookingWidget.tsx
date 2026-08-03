@@ -11,25 +11,28 @@ import {
   StickyNote,
 } from "lucide-react";
 import { IAvailability } from "../../_types/AllTypes";
- // adjust to your actual types path
+import { createBooking } from "../../_acitons/booking";
+
 
 const BookingWidget = ({
   serviceId,
   price,
   slots,
+  role
 }: {
   serviceId: string;
   price: number;
   slots: IAvailability[];
+  role:string
 }) => {
   const [selectedSlotId, setSelectedSlotId] = useState<string | null>(null);
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
-
+  
   const canBook = Boolean(selectedSlotId) && address.trim().length > 0;
   const selectedSlot = slots.find((s) => s.id === selectedSlotId);
-
+    //  console.log(role)
   const handleSlotClick = (slot: IAvailability) => {
     if (!slot.isSlotActive) {
       toast.error("This slot is already booked", {
@@ -41,15 +44,32 @@ const BookingWidget = ({
   };
 
   const handleBook = async () => {
-    if (!canBook) return;
+    if (!canBook || !selectedSlotId) return;
     setSubmitting(true);
+    if(role!="CUSTOMER")
+    {
+      return toast.error("Only Customer can booking this")
+    }
     try {
-      // TODO: wire up to your booking server action, e.g.
-      // await createBooking({ serviceId, slotId: selectedSlotId, address, notes });
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      toast.success("Booking request sent", {
-        description: "The technician will confirm your slot shortly.",
+      const result = await createBooking({
+        serviceId,
+        slotID: selectedSlotId,
+        address: address.trim(),
+        customerNotes: notes.trim() || undefined,
       });
+       console.log(result)
+      if (result.success) {
+        toast.success("Booking request sent", {
+          description: result.message || "The technician will confirm your slot shortly.",
+        });
+        setSelectedSlotId(null);
+        setAddress("");
+        setNotes("");
+      } else {
+        toast.error("Booking failed", {
+          description: result.message,
+        });
+      }
     } catch {
       toast.error("Something went wrong", {
         description: "Please try booking again.",
@@ -62,18 +82,17 @@ const BookingWidget = ({
   return (
     <div className="rounded-3xl border border-gray-100 bg-white shadow-xl shadow-gray-200/50 overflow-hidden">
       <div className="p-6 sm:p-7">
-        <h3 className="text-lg font-bold text-gray-900">Book This Service</h3>
+        <h3 className="ms:text-lg text-xl font-bold text-gray-900">Book This Service</h3>
         <p className="text-sm text-gray-500 mt-0.5">
           Choose a time, then confirm your address.
         </p>
 
-        {/* Step 1 — slots */}
         <div className="mt-6">
-          <p className="text-xs font-semibold tracking-wide text-gray-400 uppercase mb-3">
+          <p className="text-xs font-semibold tracking-wide text-gray-600 uppercase mb-3">
             1. Choose a time
           </p>
 
-          <div className="grid grid-cols-2 gap-2.5 max-h-[220px] overflow-y-auto pr-0.5">
+          <div className="grid grid-cols-2 gap-2.5 `max-h-55] overflow-y-auto pr-0.5">
             {slots.map((slot) => {
               const isSelected = selectedSlotId === slot.id;
               const isDisabled = !slot.isSlotActive;
@@ -84,13 +103,13 @@ const BookingWidget = ({
                   type="button"
                   onClick={() => handleSlotClick(slot)}
                   aria-disabled={isDisabled}
-                  className={`text-left rounded-xl border p-3 transition
+                  className={`text-left rounded-xl cursor-pointer border p-3 transition
                     ${
                       isDisabled
                         ? "border-gray-100 bg-gray-50 opacity-60 cursor-not-allowed"
                         : isSelected
-                        ? "border-primary bg-primary/[0.06] ring-2 ring-primary/20"
-                        : "border-gray-200 hover:border-primary/40 hover:bg-primary/[0.02]"
+                        ? "border-primary bg-primary/6 ring-2 ring-primary/20"
+                        : "border-gray-200 hover:border-primary/40 hover:bg-primary/2"
                     }`}
                 >
                   <div className="flex items-center justify-between gap-1">
@@ -127,16 +146,15 @@ const BookingWidget = ({
             })}
 
             {!slots.length && (
-              <p className="col-span-2 text-sm text-gray-400 text-center py-6">
+              <p className="col-span-2 text-sm text-gray-600 text-center py-6">
                 No slots available right now.
               </p>
             )}
           </div>
         </div>
 
-        {/* Step 2 — details */}
         <div className="mt-7">
-          <p className="text-xs font-semibold tracking-wide text-gray-400 uppercase mb-3">
+          <p className="text-xs font-semibold tracking-wide text-gray-600 uppercase mb-3">
             2. Your details
           </p>
 
@@ -207,7 +225,7 @@ const BookingWidget = ({
         <button
           onClick={handleBook}
           disabled={!canBook || submitting}
-          className={`w-full rounded-xl py-3.5 font-semibold transition
+          className={`w-full cursor-pointer rounded-xl py-3 text-base font-semibold transition
             ${
               canBook && !submitting
                 ? "bg-primary text-white hover:opacity-90 active:scale-[0.99]"
@@ -218,7 +236,7 @@ const BookingWidget = ({
         </button>
 
         {!canBook && (
-          <p className="text-xs text-gray-400 text-center mt-3">
+          <p className="text-xs text-gray-600 text-center mt-3">
             Select a slot and enter your address to continue.
           </p>
         )}

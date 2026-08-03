@@ -40,13 +40,13 @@ const AddServiceModal = ({
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-primary text-white rounded-lg px-4 py-2 font-medium hover:opacity-90"
+        className="bg-primary cursor-pointer text-sm text-white rounded-lg px-4 py-2 font-medium hover:opacity-90"
       >
         + Create Service
       </button>
 
       {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-3">
           <div className="relative w-full max-w-2xl rounded-xl bg-white p-6 shadow-xl modal-slide-down">
 
             <button
@@ -56,7 +56,7 @@ const AddServiceModal = ({
               ✕
             </button>
 
-            <h2 className="text-2xl font-bold mb-6 text-gray-800">
+            <h2 className="text-2xl font-bold mb-6 text-gray-600">
               Create Service
             </h2>
 
@@ -70,7 +70,7 @@ const AddServiceModal = ({
                 <input
                   name="name"
                   required
-                  className="w-full rounded-lg border border-gray-400 px-4 py-3 outline-none focus:border-primary"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-primary"
                   placeholder="Enter service name"
                 />
               </div>
@@ -83,7 +83,7 @@ const AddServiceModal = ({
                 <input
                   name="title"
                   required
-                  className="w-full rounded-lg border border-gray-400 px-4 py-3 outline-none focus:border-primary"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-primary"
                   placeholder="Enter title"
                 />
               </div>
@@ -97,7 +97,7 @@ const AddServiceModal = ({
                   rows={5}
                   name="description"
                   required
-                  className="w-full rounded-lg border border-gray-400 px-4 py-3 outline-none focus:border-primary"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-primary"
                   placeholder="Write description..."
                 />
               </div>
@@ -113,7 +113,7 @@ const AddServiceModal = ({
                     name="price"
                     type="number"
                     required
-                    className="w-full rounded-lg border border-gray-400 px-4 py-3 outline-none focus:border-primary"
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-primary"
                     placeholder="150"
                   />
                 </div>
@@ -126,7 +126,7 @@ const AddServiceModal = ({
                   <select
                     required
                     name="categoryId"
-                    className="w-full rounded-lg border border-gray-400 px-4 py-3 outline-none focus:border-primary"
+                    className="w-full rounded-lg cursor-pointer border border-gray-300 px-4 py-3 outline-none focus:border-primary"
                     defaultValue=""
                   >
                     <option value="" disabled>
@@ -147,7 +147,7 @@ const AddServiceModal = ({
 
               <button
                 disabled={pending}
-                className="w-full rounded-lg bg-primary py-3 font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
+                className="w-full rounded-lg bg-primary py-2.5 cursor-pointer text-sm  font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
               >
                 {pending ? "Creating..." : "Create Service"}
               </button>

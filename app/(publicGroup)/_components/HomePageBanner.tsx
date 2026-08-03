@@ -14,62 +14,30 @@ const HomePageBanner = () => {
             Discover <br />
             more than{" "}
             <span className="text-[#26A4FF]  relative block">
-              5000+ Service Post
+              5000+ Services
               <Image src={line} className="mt-3" alt="" />
             </span>
           </h1>
 
           <div className="bg-banner ">
             <p className="text-gray-400 mb-6 max-w-md lg:mx-0">
-              Great platform for the job seeker that searching for new career
-              heights and passionate about startups.
+              Find trusted professionals for all your home service needs. From
+              plumbing and electrical repairs to cleaning and painting, book
+              skilled technicians quickly and hassle-free.
             </p>
 
-            {/* Search Box */}
-            {/* <div className="bg-white z-30  shadow-lg sm:p-3 p-2 gap-4 flex flex-col sm:flex-row items-center  lg:mx-0">
-              <div className="relative flex-1 w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2  " />
-                <input
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  type="text"
-                  placeholder="Job title"
-                  className="w-full px-4 py-2 pl-10 outline-none text-gray-600 border-b border-gray-300"
-                />
-              </div>
-
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="flex-1 cursor-pointer w-full px-4 py-2 outline-none text-gray-600 border-b border-gray-300"
-              >
-                <option value="">Select Category</option>
-                {categories?.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
-
-              <button
-                onClick={handleSearch}
-                className="bg-primary cursor-pointer text-white px-6 py-2 transition duration-300 w-full sm:w-auto flex items-center justify-center gap-2 hover:bg-primary-dark"
-              >
-                <FaSearch className="text-sm" />
-                <span>Search my job</span>
-              </button>
-            </div> */}
             <p className="text-sm my-7 text-gray-500">
-              Popular : UI Designer, UX Researcher, Android, Admin
+              Popular: Plumbing, Electrical, Cleaning, Painting, AC Repair,
+              Carpentry
             </p>
           </div>
         </div>
 
         <div className="relative w-[50%] lg:flex hidden pt-20 justify-end overflow-hidden">
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 -z-10"
             style={{
-              backgroundImage: `url(${background})`,
+              backgroundImage: `url(${background.src})`,
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",

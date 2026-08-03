@@ -89,7 +89,7 @@ const ServiceSearchBar = ({
 
       <button
         onClick={handleReset}
-        className="rounded-lg border border-primary px-5 py-2.5 text-sm font-medium text-primary transition-all hover:bg-primary hover:text-white"
+        className="rounded-lg border cursor-pointer border-primary px-5 py-2.5 text-sm font-medium text-primary transition-all hover:bg-primary hover:text-white"
       >
         Reset
       </button>

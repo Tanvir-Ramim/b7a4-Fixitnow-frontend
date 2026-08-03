@@ -31,12 +31,12 @@ const LoginForm = () => {
     <form action={action}>
       {/* Username */}
       <div className="mb-4">
-        <label className="block mb-2 font-semibold">User Name</label>
+        <label className="block mb-2 font-semibold">Email</label>
 
         <input
           type="text"
           name="email"
-          placeholder="User Name"
+          placeholder="email"
           className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />

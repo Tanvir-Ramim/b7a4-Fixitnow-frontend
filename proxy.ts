@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 import { jwtUtils } from "./shared/utils/jwt";
 import { getNewAccessToken } from "./shared/service/refreshToken";
 
-const AUTH_ROUTES = ["/login", "/register"];
+const AUTH_ROUTES = ["/login", "/registration"];
 
 const PUBLIC_ROUTES = ["/", "/services"];
 

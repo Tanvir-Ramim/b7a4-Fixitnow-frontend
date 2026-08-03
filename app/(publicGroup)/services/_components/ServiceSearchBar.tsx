@@ -4,11 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRef } from "react";
 import { ICategory } from "../../_types/AllTypes";
 
-const ServiceSearchBar = ({
-  categories,
-}: {
-  categories: ICategory[];
-}) => {
+const ServiceSearchBar = ({ categories }: { categories: ICategory[] }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -27,7 +23,8 @@ const ServiceSearchBar = ({
     }
 
     router.replace(
-      params.toString() ? `${pathname}?${params.toString()}` : pathname
+      params.toString() ? `${pathname}?${params.toString()}` : pathname,
+      { scroll: false },
     );
   };
 
@@ -58,7 +55,7 @@ const ServiceSearchBar = ({
       selectRef.current.value = "";
     }
 
-    router.replace(pathname);
+    router.replace(pathname, { scroll: false });
   };
 
   return (

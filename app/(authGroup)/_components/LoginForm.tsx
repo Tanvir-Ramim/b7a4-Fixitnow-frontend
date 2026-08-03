@@ -9,7 +9,7 @@ const LoginForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get("redirectTo") ?? "";
+  const redirectTo = "";
   const [state, action, pending] = useActionState(
     loginAction.bind(null, redirectTo),
     false,

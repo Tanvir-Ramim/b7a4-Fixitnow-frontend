@@ -2,11 +2,8 @@
 
 export const getLatestService = async () => {
   const res = await fetch(`${process.env.BACKEND_API_URL}/service`, {
-    cache: "force-cache",
-    next: {
-      revalidate: 60 * 60 * 24,
-      tags:["latestService"]
-    },
+    cache: "no-cache",
+  
   });
 
   const result = await res.json();

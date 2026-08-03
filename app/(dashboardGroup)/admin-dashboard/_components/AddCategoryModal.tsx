@@ -35,7 +35,7 @@ const AddCategoryModal = () => {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-white"
+        className="flex items-center cursor-pointer gap-2 text-sm rounded-xl bg-primary px-4 py-2 text-white"
       >
         <Plus size={18} />
         Add Category
@@ -43,8 +43,8 @@ const AddCategoryModal = () => {
 
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="w-full max-w-md rounded-xl bg-white p-6">
-            <p className="mb-4 text-lg font-bold text-gray-900">
+          <div className="w-full max-w-md modal-slide-down rounded-xl bg-white p-6">
+            <p className="mb-4 text-base font-bold text-gray-900">
               Add Category
             </p>
 
@@ -66,14 +66,14 @@ const AddCategoryModal = () => {
             <div className="mt-6 flex justify-end gap-3">
               <button
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-4 py-2 text-gray-600"
+                className="rounded-lg text-sm cursor-pointer border border-gray-500 px-4 py-2 text-gray-600"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSubmit}
                 disabled={isPending}
-                className="rounded-lg bg-primary px-4 py-2 text-white disabled:opacity-50"
+                className="rounded-lg text-sm  cursor-pointer bg-primary px-4 py-2 text-white disabled:opacity-50"
               >
                 {isPending ? "Saving..." : "Save"}
               </button>

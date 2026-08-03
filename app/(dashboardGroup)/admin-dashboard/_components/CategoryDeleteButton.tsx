@@ -25,7 +25,7 @@ const CategoryDeleteButton = ({ categoryId }: { categoryId: string }) => {
     <button
       onClick={handleDelete}
       disabled={isPending}
-      className="rounded-lg p-2 text-red-600 hover:bg-red-50 disabled:opacity-50"
+      className="rounded-lg p-2 cursor-pointer text-red-600 hover:bg-red-50 disabled:opacity-50"
     >
       <Trash2 size={18} />
     </button>

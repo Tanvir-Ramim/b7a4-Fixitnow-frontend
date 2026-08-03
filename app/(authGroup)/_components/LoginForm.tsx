@@ -75,7 +75,7 @@ const LoginForm = () => {
             onClick={() => setPasswordVisible(!passwordVisible)}
             className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-xl"
           >
-            {passwordVisible ? <EyeOff /> : <Eye />}
+            {passwordVisible ? <Eye /> : <EyeOff />}
           </span>
         </div>
       </div>

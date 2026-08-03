@@ -1,10 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import loginBG from "../_assets/loginImage.png";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Home } from "lucide-react";
 import logo from "../../../shared/assets/Logo.png";
-
-
 
 import RegistrationForm from "../_components/RegistrationForm";
 
@@ -21,26 +19,49 @@ const page = () => {
       </div>
 
       {/* Right Side */}
-      <div className="w-full flex items-center justify-center h-screen bg-[#F6FDF9]">
+      <div className="w-full flex items-center justify-center h-screen bg-[#F8F8FD]">
         <div className="w-full max-w-md px-8">
-          <Image src={logo} alt="Logo" className="mx-auto mb-8" />
+          <Image
+            src={logo}
+            alt="Quick Hire Logo"
+            className="mx-auto mb-6 object-contain"
+          />
 
-          <h2 className="text-center text-2xl font-bold mb-8">
-            Welcome to Quick Hire 
-          </h2>
-          <h2 className="text-center text-2xl font-bold mb-8">
-            Registration
-          </h2>
+          <div className="text-center mb-6">
+            <h1 className="text-3xl font-bold text-gray-900">
+              Welcome to Quick Hire 👋
+            </h1>
+
+            <p className="mt-2 text-sm text-gray-500">
+              Sign up to hire skilled professionals quickly and securely.
+            </p>
+
+            <h2 className="mt-4 text-xl font-semibold text-[#034DA2]">
+              Registration
+            </h2>
+          </div>
           <RegistrationForm></RegistrationForm>
 
           {/* Back Home */}
-          <div className="text-center flex items-center justify-center gap-3 mt-6 text-sm">
-            <h4>Registration</h4>
 
-          
+          <div className="mt-6 flex flex-col items-center gap-3 text-sm text-gray-600">
+            <p>
+              Already have an account?{" "}
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-1 font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+              >
+                Sign in
+                <ArrowRight size={16} />
+              </Link>
+            </p>
 
-            <Link  className="text-blue-700" href="/login">
-              <ArrowRight size={18} />
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 rounded-md border border-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-[#034DA2] transition-all"
+            >
+              <Home size={16} />
+              Back to Home
             </Link>
           </div>
         </div>

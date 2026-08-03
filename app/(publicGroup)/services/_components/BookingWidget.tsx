@@ -13,26 +13,25 @@ import {
 import { IAvailability } from "../../_types/AllTypes";
 import { createBooking } from "../../_acitons/booking";
 
-
 const BookingWidget = ({
   serviceId,
   price,
   slots,
-  role
+  role,
 }: {
   serviceId: string;
   price: number;
   slots: IAvailability[];
-  role:string
+  role: string;
 }) => {
   const [selectedSlotId, setSelectedSlotId] = useState<string | null>(null);
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  
+
   const canBook = Boolean(selectedSlotId) && address.trim().length > 0;
   const selectedSlot = slots.find((s) => s.id === selectedSlotId);
-    //  console.log(role)
+  //  console.log(role)
   const handleSlotClick = (slot: IAvailability) => {
     if (!slot.isSlotActive) {
       toast.error("This slot is already booked", {
@@ -46,9 +45,9 @@ const BookingWidget = ({
   const handleBook = async () => {
     if (!canBook || !selectedSlotId) return;
     setSubmitting(true);
-    if(role!="CUSTOMER")
-    {
-      return toast.error("Only Customer can booking this")
+    if (role != "CUSTOMER") {
+      setSubmitting(false);
+      return toast.error("Only Customer can booking this");
     }
     try {
       const result = await createBooking({
@@ -57,10 +56,11 @@ const BookingWidget = ({
         address: address.trim(),
         customerNotes: notes.trim() || undefined,
       });
-       console.log(result)
+      console.log(result);
       if (result.success) {
         toast.success("Booking request sent", {
-          description: result.message || "The technician will confirm your slot shortly.",
+          description:
+            result.message || "The technician will confirm your slot shortly.",
         });
         setSelectedSlotId(null);
         setAddress("");
@@ -82,7 +82,9 @@ const BookingWidget = ({
   return (
     <div className="rounded-3xl border border-gray-100 bg-white shadow-xl shadow-gray-200/50 overflow-hidden">
       <div className="p-6 sm:p-7">
-        <h3 className="ms:text-lg text-xl font-bold text-gray-900">Book This Service</h3>
+        <h3 className="ms:text-lg text-xl font-bold text-gray-900">
+          Book This Service
+        </h3>
         <p className="text-sm text-gray-500 mt-0.5">
           Choose a time, then confirm your address.
         </p>
@@ -108,8 +110,8 @@ const BookingWidget = ({
                       isDisabled
                         ? "border-gray-100 bg-gray-50 opacity-60 cursor-not-allowed"
                         : isSelected
-                        ? "border-primary bg-primary/6 ring-2 ring-primary/20"
-                        : "border-gray-200 hover:border-primary/40 hover:bg-primary/2"
+                          ? "border-primary bg-primary/6 ring-2 ring-primary/20"
+                          : "border-gray-200 hover:border-primary/40 hover:bg-primary/2"
                     }`}
                 >
                   <div className="flex items-center justify-between gap-1">
@@ -209,10 +211,11 @@ const BookingWidget = ({
             {selectedSlot ? (
               <span className="flex items-center gap-1.5 text-gray-700 font-medium">
                 <CheckCircle2 size={14} className="text-primary" />
-                {new Date(selectedSlot.slotDate).toLocaleDateString(
-                  undefined,
-                  { weekday: "short", month: "short", day: "numeric" }
-                )}
+                {new Date(selectedSlot.slotDate).toLocaleDateString(undefined, {
+                  weekday: "short",
+                  month: "short",
+                  day: "numeric",
+                })}
                 , {selectedSlot.startTime}
               </span>
             ) : (

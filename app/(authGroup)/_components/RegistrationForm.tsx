@@ -92,7 +92,7 @@ const RegistrationForm = () => {
                 target.setCustomValidity("Password is required");
               } else if (target.validity.tooShort) {
                 target.setCustomValidity(
-                  "Password must be at least 6 characters"
+                  "Password must be at least 6 characters",
                 );
               }
             }}
@@ -106,7 +106,7 @@ const RegistrationForm = () => {
             onClick={() => setPasswordVisible(!passwordVisible)}
             className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
           >
-            {passwordVisible ? <EyeOff /> : <Eye />}
+            {passwordVisible ? <Eye /> : <EyeOff />}
           </span>
         </div>
       </div>

@@ -175,7 +175,7 @@ const SingleServiceDescription = async ({ id }: { id: string }) => {
             serviceId={id}
             price={service.price}
             slots={profile?.availabilities ?? []}
-            role={user.data.user.role}
+            role={user?.data?.user?.role ?? "FAKE"}
           />
         </aside>
       </div>

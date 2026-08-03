@@ -35,7 +35,7 @@ const UserStatusButton = ({
     <button
       onClick={handleToggle}
       disabled={isPending}
-      className={`rounded-lg px-3 py-1.5 text-sm font-medium disabled:opacity-50 ${
+      className={`rounded-lg cursor-pointer px-3 py-1.5 text-sm font-medium disabled:opacity-50 ${
         isActive
           ? "bg-red-50 text-red-600 hover:bg-red-100"
           : "bg-green-50 text-green-600 hover:bg-green-100"

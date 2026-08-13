@@ -1,8 +1,9 @@
-import  { Suspense } from "react";
+import { Suspense } from "react";
 import HomePageBanner from "./_components/HomePageBanner";
 import HomePageCategory from "./_components/HomePageCategory";
 import StartPosting from "./_components/StartPosting";
 import LatestServices from "./_components/LatestServices";
+import Faq from "./_components/Faq";
 
 const page = () => {
   return (
@@ -16,6 +17,7 @@ const page = () => {
         <StartPosting></StartPosting>
       </div>
       <LatestServices></LatestServices>
+      <Faq></Faq>
     </div>
   );
 };

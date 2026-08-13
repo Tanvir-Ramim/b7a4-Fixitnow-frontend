@@ -1,5 +1,6 @@
 import Image from "next/image";
 import logo from "../../../shared/assets/Logo.png";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -30,16 +31,14 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-semibold mb-4">About</h3>
             <ul className="space-y-3 text-sm">
-              <li className="hover:text-white cursor-pointer">About Us</li>
-              <li className="hover:text-white cursor-pointer">How It Works</li>
               <li className="hover:text-white cursor-pointer">
-                Become a Technician
+                <Link href="/about-us">About Us</Link>
               </li>
               <li className="hover:text-white cursor-pointer">
-                Terms & Conditions
+                <Link href="/terms"> Terms & Conditions</Link>
               </li>
               <li className="hover:text-white cursor-pointer">
-                Privacy Policy
+                <Link href="/policy"> Privacy Policy</Link>
               </li>
             </ul>
           </div>
@@ -48,10 +47,15 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-semibold mb-4">Resources</h3>
             <ul className="space-y-3 text-sm">
-              <li className="hover:text-white cursor-pointer">Help Center</li>
-              <li className="hover:text-white cursor-pointer">Service Guide</li>
-              <li className="hover:text-white cursor-pointer">FAQs</li>
-              <li className="hover:text-white cursor-pointer">Contact Us</li>
+              <li className="hover:text-white cursor-pointer">
+                <Link href="/contact-us"> Help Center</Link>
+              </li>
+              <li className="hover:text-white cursor-pointer">
+                <Link href="/contact-us"> FAQs</Link>
+              </li>
+              <li className="hover:text-white cursor-pointer">
+                <Link href="/contact-us"> Contact Us</Link>
+              </li>
             </ul>
           </div>
 

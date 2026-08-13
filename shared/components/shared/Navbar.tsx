@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { logout } from "@/shared/service/logout";
 import { usePathname, useRouter } from "next/navigation";
 import { getNavData } from "@/shared/utils/contentData";
+import Auth from "./Profile";
 
 const Navbar = ({ user }: { user: IUser }) => {
   const navdata = getNavData(user?.role);
@@ -104,7 +105,7 @@ const Navbar = ({ user }: { user: IUser }) => {
 
             {/* Middle */}
             <div className="hidden md:flex items-center gap-8">
-              {navdata.map((item, index) => (
+              {navdata.slice(0, 4).map((item, index) => (
                 <Link
                   href={item?.link}
                   key={index}
@@ -118,37 +119,32 @@ const Navbar = ({ user }: { user: IUser }) => {
             </div>
 
             <div className="hidden  md:flex items-center">
-              {!user ? (
-                <Link href="/login">
-                  <button className="bg-primary text-white px-5 py-1.5 font-semibold cursor-pointer">
-                    Login
-                  </button>
-                </Link>
+              {user ? (
+                <Auth navLink={navdata[4].link} user={user}></Auth>
               ) : (
-                <div className="flex items-center gap-3 bg-gray-100 px-4 py-1.5 rounded-full">
-                  <div className="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center">
-                    <User size={16} />
-                  </div>
-
-                  <span className="font-medium capitalize text-gray-700">
-                    {user.name}
-                  </span>
-
-                  <button
-                    // onClick={handleLogout}
-                    onClick={async () => {
-                      await handleUserMenuAction("logout");
-                    }}
-                    className="text-red-500 hover:text-red-600 cursor-pointer"
-                    title="Logout"
-                  >
-                    <LogOut size={20} />
-                  </button>
+                <div className="flex cursor-pointer items-center gap-1.5 pl-2.5 pr-3 py-1.5 rounded-full border border-[#004282]/20 text-[#004282] hover:bg-[#004282]/5 hover:border-[#004282]/40 transition-all duration-300">
+                  <User size={15} />
+                  <Link href={"/login"} className="text-sm font-medium">
+                    Login
+                  </Link>
                 </div>
               )}
             </div>
 
             <div className="flex md:hidden items-center  gap-4">
+              <div className="md:hidden  flex items-center">
+                {user ? (
+                  <Auth navLink={navdata[4].link} user={user}></Auth>
+                ) : (
+                  <div className="flex cursor-pointer items-center gap-1.5 pl-2.5 pr-3 py-1.5 rounded-full border border-[#004282]/20 text-[#004282] hover:bg-[#004282]/5 hover:border-[#004282]/40 transition-all duration-300">
+                    <User size={15} />
+                    <Link href={"/login"} className="text-sm font-medium">
+                      Login
+                    </Link>
+                  </div>
+                )}
+              </div>
+
               <button
                 onClick={toggleMenu}
                 className=" cursor-pointer bg-white rounded-full  "

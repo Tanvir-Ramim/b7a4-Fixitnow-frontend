@@ -56,7 +56,7 @@ const BookingWidget = ({
         address: address.trim(),
         customerNotes: notes.trim() || undefined,
       });
-      console.log(result);
+   
       if (result.success) {
         toast.success("Booking request sent", {
           description:

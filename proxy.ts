@@ -8,28 +8,35 @@ import { getNewAccessToken } from "./shared/service/refreshToken";
 
 const AUTH_ROUTES = ["/login", "/registration"];
 
-const PUBLIC_ROUTES = ["/", "/services"];
-
+const PUBLIC_ROUTES = ["/", "/services" , "/contact-us" , "/about-us"];
 
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   const cookieStore = await cookies();
- 
 
   let accessToken = request.cookies.get("accessToken")?.value;
   const refreshToken = request.cookies.get("refreshToken")?.value;
 
-  let decodedAccessToken = accessToken
-    ? jwtUtils.verifyToken(accessToken,  process.env.JWT_ACCESS_SECRET as string,)
-    : null;
-    
-  const decodedRefreshToken = refreshToken
-    ? jwtUtils.verifyToken(
-        refreshToken,
-        process.env.JWT_REFRESH_SECRET as string,
-      )
-    : null;
+  let decodedAccessToken;
+  if (accessToken) {
+    decodedAccessToken = accessToken
+      ? jwtUtils.verifyToken(
+          accessToken,
+          process.env.JWT_ACCESS_SECRET as string,
+        )
+      : null;
+  }
+
+  let decodedRefreshToken;
+  if (refreshToken) {
+    decodedRefreshToken = refreshToken
+      ? jwtUtils.verifyToken(
+          refreshToken,
+          process.env.JWT_REFRESH_SECRET as string,
+        )
+      : null;
+  }
 
   if (!decodedAccessToken?.success && decodedRefreshToken?.success) {
     const result = await getNewAccessToken();
@@ -106,7 +113,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|favicon.ico|_next/image|.*\\.png$).*)",
-  ],
+  matcher: ["/((?!api|_next/static|favicon.ico|_next/image|.*\\.png$).*)"],
 };
